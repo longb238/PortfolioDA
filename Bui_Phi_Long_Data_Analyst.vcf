@@ -1,4 +1,4 @@
-BEGIN:VCARD
+﻿BEGIN:VCARD
 VERSION:3.0
 N:Bùi;Phi Long;;;
 FN:Bùi Phi Long — Data Analyst (Operations & BI)
@@ -6,8 +6,8 @@ ORG:Operations & Business Intelligence Analytics
 TITLE:Data Analyst (SQL BigQuery · Power BI · Kimball Star Schema)
 TEL;TYPE=CELL,VOICE,MSG:+84375843765
 EMAIL;TYPE=INTERNET,PREF:longb238@gmail.com
-URL;TYPE=WORK:https://app.powerbi.com/view
-URL;TYPE=LINKEDIN:https://linkedin.com/in/bui-philong-7178b1210
+URL;TYPE=WORK:https://app.powerbi.com/view?r=eyJrIjoiZDhiOWE3YTMtYzMwMi00NDNiLWJiMzUtOWQxNjgyYTg2MzhkIiwidCI6IjVlOGIzMjY5LTc2Y2EtNDU3Yy04NDdmLTQ0NGUzZGI5ODZhNyIsImMiOjl9
+URL;TYPE=LINKEDIN:https://www.linkedin.com/in/bui-phi-long-7178b1210
 ADR;TYPE=HOME:;;225 Tran Cung, Cau Giay;Ha Noi;;100000;Vietnam
 BDAY:2001-09-10
 NOTE:Data Analyst with 3 years of experience in Operations & Commercial Analytics (SQL Google BigQuery, Kimball Star Schema, Power BI DAX, Power Query ETL, Advanced Excel MOS 900/1000, IELTS 7.0). Managed & reconciled 6,800+ annual trips across 7 warehouses with >99% SLA for UNIQLO & MUJI.

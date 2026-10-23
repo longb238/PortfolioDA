@@ -1,12 +1,12 @@
-{
+﻿{
   "analystProfile": {
     "fullName": "Bùi Phi Long",
     "role": "Data Analyst (Operations & BI Analytics)",
     "dateOfBirth": "2001-09-10",
     "phone": "037.584.3765",
     "email": "longb238@gmail.com",
-    "linkedin": "https://linkedin.com/in/bui-philong-7178b1210",
-    "liveDashboard": "https://app.powerbi.com/view",
+    "linkedin": "https://www.linkedin.com/in/bui-phi-long-7178b1210",
+    "liveDashboard": "https://app.powerbi.com/view?r=eyJrIjoiZDhiOWE3YTMtYzMwMi00NDNiLWJiMzUtOWQxNjgyYTg2MzhkIiwidCI6IjVlOGIzMjY5LTc2Y2EtNDU3Yy04NDdmLTQ0NGUzZGI5ODZhNyIsImMiOjl9",
     "location": "225 Tran Cung, Cau Giay, Ha Noi",
     "portraitFile": "profile-long-portrait.jpg",
     "highResPhotoFile": "profile-long.jpg",

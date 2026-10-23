@@ -1,4 +1,4 @@
-# Bùi Phi Long — Data Analyst (Operations & BI Analytics) | Executive Portfolio & BI Showcase
+﻿# Bùi Phi Long — Data Analyst (Operations & BI Analytics) | Executive Portfolio & BI Showcase
 
 **Executive Portfolio, Interactive BI Simulator & Analytical Case Studies** built with a standalone **Dark Glassmorphism** architecture (`#060607`, `#D6D7E6`, `#08CFFE`, `#9B5CFF`, `#E648B5`).
 
@@ -12,8 +12,8 @@
 - **Location:** 225 Tran Cung, Cau Giay, Ha Noi, Vietnam
 - **Phone / Zalo:** `037.584.3765`
 - **Email:** [longb238@gmail.com](mailto:longb238@gmail.com)
-- **LinkedIn:** [linkedin.com/in/bui-philong-7178b1210](https://linkedin.com/in/bui-philong-7178b1210)
-- **Live Power BI Dashboard:** [app.powerbi.com/view](https://app.powerbi.com/view)
+- **LinkedIn:** [www.linkedin.com/in/bui-phi-long-7178b1210](https://www.linkedin.com/in/bui-phi-long-7178b1210)
+- **Live Power BI Dashboard:** [app.powerbi.com/view](https://app.powerbi.com/view?r=eyJrIjoiZDhiOWE3YTMtYzMwMi00NDNiLWJiMzUtOWQxNjgyYTg2MzhkIiwidCI6IjVlOGIzMjY5LTc2Y2EtNDU3Yy04NDdmLTQ0NGUzZGI5ODZhNyIsImMiOjl9)
 
 ---
 
