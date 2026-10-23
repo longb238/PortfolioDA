@@ -1,0 +1,18 @@
+{
+  "name": "Bùi Phi Long — Data Analyst (Operations & BI Analytics)",
+  "short_name": "Long · Data & BI",
+  "description": "Executive Portfolio & Interactive BI Showcase of Bùi Phi Long — Data Analyst (SQL BigQuery, Kimball Star Schema, Power BI, DAX, MOS Excel 900/1000).",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#060607",
+  "theme_color": "#08CFFE",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "profile-long-portrait.jpg",
+      "sizes": "760x856",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "analystProfile": {
+    "fullName": "Bùi Phi Long",
+    "role": "Data Analyst (Operations & BI Analytics)",
+    "dateOfBirth": "2001-09-10",
+    "phone": "037.584.3765",
+    "email": "longb238@gmail.com",
+    "linkedin": "https://linkedin.com/in/bui-philong-7178b1210",
+    "liveDashboard": "https://app.powerbi.com/view",
+    "location": "225 Tran Cung, Cau Giay, Ha Noi",
+    "portraitFile": "profile-long-portrait.jpg",
+    "highResPhotoFile": "profile-long.jpg",
+    "experienceYears": 3,
+    "certifications": [
+      { "name": "MOS Excel 365 Apps", "score": "900/1000", "issuer": "IIG", "year": 2026 },
+      { "name": "MOS Word 365 Apps", "score": "800/1000", "issuer": "IIG", "year": 2026 },
+      { "name": "IELTS Academic / Working Proficiency", "score": "7.0", "year": 2026 }
+    ]
+  },
+  "operationalMetricsBaseline": {
+    "annualDeliveryTrips": 6836,
+    "uniqloTrips": 5300,
+    "mujiTrips": 1536,
+    "warehousesCount": 7,
+    "deliveryStaffCount": 180,
+    "teamLeadersCount": 15,
+    "baselineOnTimeSlaPct": 99.2,
+    "monthlyCarrierTickets": 5000,
+    "avgTripCostUsd": 42,
+    "estimatedAnomalyRateWithoutAuditPct": 2.4
+  },
+  "kimballStarSchemaCatalog": {
+    "shopeeWarehouseModel": {
+      "grain": "1 row per warehouse order fulfillment event",
+      "factTables": ["Fact_Order_Fulfillment"],
+      "dimensionTables": ["Dim_Warehouse_Hub", "Dim_Carrier", "Dim_Order_Type", "Dim_Staff_Shift", "Dim_Calendar"],
+      "coreDaxMeasures": [
+        "On_Time_SLA_Pct = DIVIDE(CALCULATE(COUNTROWS(Fact_Order_Fulfillment), Fact_Order_Fulfillment[SLA_Status] = \"On-Time\"), COUNTROWS(Fact_Order_Fulfillment), 0)",
+        "Late_Rate_Pct = DIVIDE(CALCULATE(COUNTROWS(Fact_Order_Fulfillment), Fact_Order_Fulfillment[SLA_Status] = \"Late\"), COUNTROWS(Fact_Order_Fulfillment), 0)",
+        "Avg_Lead_Time_Hours = AVERAGE(Fact_Order_Fulfillment[Stage_Lead_Time_Hrs])"
+      ]
+    },
+    "nipponExpressLogisticsModel": {
+      "grain": "1 row per daily delivery trip & 3PL contractor billing line across 7 Northern Vietnam hubs",
+      "factTables": ["Fact_Daily_Trips", "Fact_3PL_Billing"],
+      "dimensionTables": ["Dim_Warehouse", "Dim_Store", "Dim_Vendor", "Dim_Route"]
+    },
+    "enterpriseSalesDwhModel": {
+      "platform": "Google BigQuery",
+      "factTables": ["Fact_Internet_Sales", "Fact_Reseller_Sales"],
+      "dimensionTables": ["Dim_Product", "Dim_Product_Subcategory", "Dim_Product_Category", "Dim_Sales_Territory", "Dim_Calendar", "Dim_Public_Holidays", "Dim_Employee", "Dim_Department"]
+    }
+  }
+}
