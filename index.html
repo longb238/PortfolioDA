@@ -1047,25 +1047,32 @@
     .case-modal {
       position: fixed;
       inset: 0;
-      z-index: 9500;
+      z-index: -1;
       background: rgba(6, 6, 7, 0.82);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 24px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.26s ease;
+      transition: opacity 0.26s ease, visibility 0.26s ease;
     }
 
     .case-modal.open {
-      opacity: 1;
-      pointer-events: auto;
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      z-index: 9999 !important;
     }
 
     .case-modal-dialog {
+      position: relative;
+      z-index: 10000;
+      pointer-events: auto;
       width: 100%;
       max-width: 960px;
       max-height: 88vh;
@@ -1078,6 +1085,15 @@
       overflow: hidden;
       transform: translateY(16px) scale(0.98);
       transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .case-modal-dialog a,
+    .case-modal-dialog button,
+    .case-modal-dialog input {
+      position: relative;
+      z-index: 10000;
+      pointer-events: auto;
+      cursor: pointer;
     }
 
     .case-modal.open .case-modal-dialog {
@@ -1095,6 +1111,9 @@
     }
 
     .case-modal-close {
+      position: relative;
+      z-index: 10000;
+      pointer-events: auto;
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -1212,8 +1231,8 @@
       position: fixed;
       bottom: 28px;
       right: 28px;
-      z-index: 9999;
-      display: flex;
+      z-index: 10002;
+      display: none;
       align-items: center;
       gap: 10px;
       padding: 13px 20px;
@@ -1227,14 +1246,17 @@
       font-size: 0.88rem;
       font-weight: 500;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       transform: translateY(16px) scale(0.97);
       transition: opacity 0.26s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .copy-toast.show {
-      opacity: 1;
-      pointer-events: auto;
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
       transform: translateY(0) scale(1);
     }
 
@@ -1279,6 +1301,15 @@
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
+      }
+      /* Prevent hidden modals and toast overlays from being forced visible when OS reduced-motion is active */
+      .case-modal:not(.open),
+      .copy-toast:not(.show) {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
       }
     }
 
@@ -1413,6 +1444,7 @@
       text-align: center;
       white-space: nowrap;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
     }
 
     .exec-portrait-zoom-badge {
@@ -1430,6 +1462,7 @@
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(6px);
+      pointer-events: none;
     }
 
     .exec-profile-info {
@@ -2656,7 +2689,7 @@ Build a single-file, one-screen **hero for a fictional AI compliance company, Ve
   </main>
 
   <!-- MODAL 1: Case Study 02 — Nippon Express Logistics ETL & 3PL Cost Control -->
-  <div id="modal-logistics-etl" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-logistics-title" onclick="if(event.target===this) closeCaseModal('modal-logistics-etl')">
+  <div id="modal-logistics-etl" class="case-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-logistics-title" onclick="if(event.target===this) closeCaseModal('modal-logistics-etl')">
     <div class="case-modal-dialog">
       <div class="case-modal-header">
         <div>
@@ -2738,7 +2771,7 @@ Build a single-file, one-screen **hero for a fictional AI compliance company, Ve
   </div>
 
   <!-- MODAL 2: Case Study 03 — Enterprise Sales DWH & 5 Google BigQuery SQL Queries -->
-  <div id="modal-bigquery-sql" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-bigquery-title" onclick="if(event.target===this) closeCaseModal('modal-bigquery-sql')">
+  <div id="modal-bigquery-sql" class="case-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-bigquery-title" onclick="if(event.target===this) closeCaseModal('modal-bigquery-sql')">
     <div class="case-modal-dialog">
       <div class="case-modal-header">
         <div>
@@ -2895,7 +2928,7 @@ ORDER BY Department, Salary_Rank;</pre>
   </div>
 
   <!-- MODAL 3: Interactive BI "What-If" SLA & 3PL Cost Control Simulator -->
-  <div id="modal-bi-simulator" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-simulator-title" onclick="if(event.target===this) closeCaseModal('modal-bi-simulator')">
+  <div id="modal-bi-simulator" class="case-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-simulator-title" onclick="if(event.target===this) closeCaseModal('modal-bi-simulator')">
     <div class="case-modal-dialog">
       <div class="case-modal-header">
         <div>
@@ -2992,7 +3025,7 @@ ORDER BY Department, Salary_Rank;</pre>
   </div>
 
   <!-- MODAL 4: Full-Size Executive Portrait Lightbox & Digital Contact Pass -->
-  <div id="modal-portrait-lightbox" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-portrait-title" onclick="if(event.target===this) closeCaseModal('modal-portrait-lightbox')">
+  <div id="modal-portrait-lightbox" class="case-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-portrait-title" onclick="if(event.target===this) closeCaseModal('modal-portrait-lightbox')">
     <div class="case-modal-dialog" style="max-width:680px;">
       <div class="case-modal-header">
         <div>
@@ -3073,32 +3106,64 @@ ORDER BY Department, Salary_Rank;</pre>
   </script>
 
   <script>
-    // Copy to Clipboard + Toast Notification, Case Study Modals & Bilingual (VI / EN) Switcher
+    // Copy to Clipboard + Toast Notification, Case Study Modals & Bilingual (VI / EN) Switcher (Defensive & Cross-Device Safe)
     (function () {
       let currentLang = 'en';
       let toastTimeout = null;
 
+      // Safe storage helper (handles fresh browsers, private mode, or blocked localStorage/sessionStorage)
+      function safeGetStorage(key) {
+        try {
+          if (typeof window !== 'undefined' && window.localStorage) {
+            const val = window.localStorage.getItem(key);
+            return val !== null ? val : null;
+          }
+        } catch (err) {}
+        return null;
+      }
+
+      function safeSetStorage(key, value) {
+        try {
+          if (typeof window !== 'undefined' && window.localStorage) {
+            window.localStorage.setItem(key, value);
+          }
+        } catch (err) {}
+      }
+
       function showToast(message) {
-        const toast = document.getElementById('copy-toast');
-        const toastText = document.getElementById('copy-toast-text');
-        if (!toast || !toastText) return;
-        toastText.textContent = message;
-        toast.classList.add('show');
-        if (toastTimeout) clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2800);
+        try {
+          const toast = document.getElementById('copy-toast');
+          const toastText = document.getElementById('copy-toast-text');
+          if (!toast || !toastText) return;
+          toastText.textContent = message || '';
+          toast.style.display = 'flex';
+          toast.style.visibility = 'visible';
+          toast.style.opacity = '1';
+          toast.classList.add('show');
+          if (toastTimeout) clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+            toast.style.opacity = '0';
+            toast.style.visibility = 'hidden';
+            toast.style.pointerEvents = 'none';
+            toast.style.display = 'none';
+          }, 2800);
+        } catch (err) {}
       }
 
       const copyFallback = (val) => {
-        const ta = document.createElement('textarea');
-        ta.value = val;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (e) {}
-        document.body.removeChild(ta);
+        try {
+          if (!document || !document.body) return;
+          const ta = document.createElement('textarea');
+          ta.value = String(val || '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          ta.style.pointerEvents = 'none';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta);
+        } catch (err) {}
       };
 
       window.copyContact = function (text, labelType) {
@@ -3111,12 +3176,17 @@ ORDER BY Department, Salary_Rank;</pre>
           }
         };
 
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(triggerSuccess).catch(() => {
+        try {
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text).then(triggerSuccess).catch(() => {
+              copyFallback(text);
+              triggerSuccess();
+            });
+          } else {
             copyFallback(text);
             triggerSuccess();
-          });
-        } else {
+          }
+        } catch (err) {
           copyFallback(text);
           triggerSuccess();
         }
@@ -3125,40 +3195,105 @@ ORDER BY Department, Salary_Rank;</pre>
       window.copySqlQuery = function (preId, queryLabel) {
         const preEl = document.getElementById(preId);
         if (!preEl) return;
-        const sqlText = preEl.textContent || preEl.innerText;
+        const sqlText = preEl.textContent || preEl.innerText || '';
         const done = () => {
           showToast(currentLang === 'vi' ? 'Đã sao chép ' + queryLabel + ' vào bộ nhớ tạm!' : 'Copied ' + queryLabel + ' to clipboard!');
         };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(sqlText).then(done).catch(() => {
+        try {
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(sqlText).then(done).catch(() => {
+              copyFallback(sqlText);
+              done();
+            });
+          } else {
             copyFallback(sqlText);
             done();
-          });
-        } else {
+          }
+        } catch (err) {
           copyFallback(sqlText);
           done();
         }
       };
 
-      window.openCaseModal = function (modalId) {
-        const modal = document.getElementById(modalId);
+      function applyClosedModalState(modal) {
         if (!modal) return;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        if (modalId === 'modal-bi-simulator' && typeof window.updateBiSimulator === 'function') {
-          window.updateBiSimulator();
-        }
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.style.display = 'none';
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
+        modal.style.pointerEvents = 'none';
+        modal.style.zIndex = '-1';
+      }
+
+      function restoreBodyScrollIfNoModalOpen() {
+        try {
+          const anyOpen = document.querySelector('.case-modal.open');
+          if (!anyOpen) {
+            if (document.body) document.body.style.overflow = 'auto';
+            if (document.documentElement) document.documentElement.style.overflow = 'auto';
+          }
+        } catch (err) {}
+      }
+
+      window.closeAllModals = function () {
+        try {
+          const modals = document.querySelectorAll('.case-modal');
+          if (modals && modals.length) {
+            modals.forEach(m => applyClosedModalState(m));
+          }
+          if (document.body) document.body.style.overflow = 'auto';
+          if (document.documentElement) document.documentElement.style.overflow = 'auto';
+        } catch (err) {}
       };
 
       window.closeCaseModal = function (modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
+        try {
+          if (modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+              applyClosedModalState(modal);
+            }
+          } else {
+            window.closeAllModals();
+          }
+          restoreBodyScrollIfNoModalOpen();
+        } catch (err) {
+          window.closeAllModals();
+        }
       };
 
+      window.openCaseModal = function (modalId) {
+        try {
+          if (!modalId) return;
+          const modal = document.getElementById(modalId);
+          if (!modal) return;
+          // Close any other open modals first
+          const modals = document.querySelectorAll('.case-modal');
+          if (modals && modals.length) {
+            modals.forEach(m => {
+              if (m !== modal) applyClosedModalState(m);
+            });
+          }
+          modal.style.display = 'flex';
+          modal.style.visibility = 'visible';
+          modal.style.opacity = '1';
+          modal.style.pointerEvents = 'auto';
+          modal.style.zIndex = '9999';
+          modal.setAttribute('aria-hidden', 'false');
+          modal.classList.add('open');
+          if (document.body) document.body.style.overflow = 'hidden';
+          if (modalId === 'modal-bi-simulator' && typeof window.updateBiSimulator === 'function') {
+            window.updateBiSimulator();
+          }
+        } catch (err) {}
+      };
+
+      // Immediately enforce closed state on all modals during initial script parse
+      window.closeAllModals();
+
       window.downloadVCard = function (e) {
-        if (e) e.preventDefault();
+        if (e && typeof e.preventDefault === 'function') e.preventDefault();
         const vcfContent = [
           'BEGIN:VCARD',
           'VERSION:3.0',
@@ -3181,9 +3316,11 @@ ORDER BY Department, Salary_Rank;</pre>
           const a = document.createElement('a');
           a.href = url;
           a.download = 'Bui_Phi_Long_Data_Analyst.vcf';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          if (document.body) {
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
           setTimeout(() => URL.revokeObjectURL(url), 1500);
           showToast(currentLang === 'vi' ? 'Đã tải danh thiếp Bùi Phi Long (.vcf)!' : 'Downloaded Bùi Phi Long vCard (.vcf)!');
         } catch (err) {
@@ -3192,127 +3329,188 @@ ORDER BY Department, Salary_Rank;</pre>
       };
 
       window.updateBiSimulator = function () {
-        const tripsEl = document.getElementById('sim-trips');
-        const reallocEl = document.getElementById('sim-realloc');
-        const auditEl = document.getElementById('sim-audit');
-        if (!tripsEl || !reallocEl || !auditEl) return;
+        try {
+          const tripsEl = document.getElementById('sim-trips');
+          const reallocEl = document.getElementById('sim-realloc');
+          const auditEl = document.getElementById('sim-audit');
+          if (!tripsEl || !reallocEl || !auditEl) return;
 
-        const trips = parseInt(tripsEl.value, 10) || 6836;
-        const realloc = parseInt(reallocEl.value, 10) || 25;
-        const audit = parseInt(auditEl.value, 10) || 100;
+          const trips = parseInt(tripsEl.value, 10) || 6836;
+          const realloc = parseInt(reallocEl.value, 10) || 25;
+          const audit = parseInt(auditEl.value, 10) || 100;
 
-        document.getElementById('sim-trips-val').textContent = trips.toLocaleString('en-US');
-        document.getElementById('sim-realloc-val').textContent = realloc + '%';
-        document.getElementById('sim-audit-val').textContent = audit + '%';
+          const tripsValEl = document.getElementById('sim-trips-val');
+          const reallocValEl = document.getElementById('sim-realloc-val');
+          const auditValEl = document.getElementById('sim-audit-val');
+          if (tripsValEl) tripsValEl.textContent = trips.toLocaleString('en-US');
+          if (reallocValEl) reallocValEl.textContent = realloc + '%';
+          if (auditValEl) auditValEl.textContent = audit + '%';
 
-        // Simulated DAX Measures: On-Time SLA %, Late Rate %, Prevented 3PL Leakage, Hours Saved
-        const baseSla = 97.95;
-        const reallocBoost = (realloc / 40) * 1.45;
-        const auditBoost = ((audit - 40) / 60) * 0.35;
-        const volumePenalty = Math.max(0, (trips - 6836) / 15000) * 0.25;
-        const sla = Math.min(99.85, Math.max(96.5, baseSla + reallocBoost + auditBoost - volumePenalty));
-        const lateRate = Math.max(0.15, 100 - sla);
+          const baseSla = 97.95;
+          const reallocBoost = (realloc / 40) * 1.45;
+          const auditBoost = ((audit - 40) / 60) * 0.35;
+          const volumePenalty = Math.max(0, (trips - 6836) / 15000) * 0.25;
+          const sla = Math.min(99.85, Math.max(96.5, baseSla + reallocBoost + auditBoost - volumePenalty));
+          const lateRate = Math.max(0.15, 100 - sla);
 
-        const avgTripCostUsd = 42;
-        const anomalyRate = 0.024;
-        const preventedUsd = Math.round(trips * avgTripCostUsd * anomalyRate * (audit / 100));
-        const hoursSaved = Math.round((trips / 10) * (0.65 + (audit / 100) * 0.35));
+          const avgTripCostUsd = 42;
+          const anomalyRate = 0.024;
+          const preventedUsd = Math.round(trips * avgTripCostUsd * anomalyRate * (audit / 100));
+          const hoursSaved = Math.round((trips / 10) * (0.65 + (audit / 100) * 0.35));
 
-        document.getElementById('sim-out-sla').textContent = sla.toFixed(2) + '%';
-        document.getElementById('sim-out-late').textContent = lateRate.toFixed(2) + '%';
-        document.getElementById('sim-out-savings').textContent = '$' + preventedUsd.toLocaleString('en-US');
-        document.getElementById('sim-out-hours').textContent = hoursSaved.toLocaleString('en-US') + ' hrs';
+          const outSlaEl = document.getElementById('sim-out-sla');
+          const outLateEl = document.getElementById('sim-out-late');
+          const outSavingsEl = document.getElementById('sim-out-savings');
+          const outHoursEl = document.getElementById('sim-out-hours');
+          if (outSlaEl) outSlaEl.textContent = sla.toFixed(2) + '%';
+          if (outLateEl) outLateEl.textContent = lateRate.toFixed(2) + '%';
+          if (outSavingsEl) outSavingsEl.textContent = '$' + preventedUsd.toLocaleString('en-US');
+          if (outHoursEl) outHoursEl.textContent = hoursSaved.toLocaleString('en-US') + ' hrs';
 
-        const statusBadge = document.getElementById('sim-badge-status');
-        if (statusBadge) {
-          if (sla >= 99.0) {
-            statusBadge.textContent = currentLang === 'vi' ? '● ĐẠT CHUẨN SLA (>99%)' : '● OPTIMAL SLA (>99%)';
-            statusBadge.style.color = 'var(--cyan)';
-          } else {
-            statusBadge.textContent = currentLang === 'vi' ? '▲ CẢNH BÁO SLA (<99%)' : '▲ SLA WATCH (<99%)';
-            statusBadge.style.color = '#E648B5';
+          const statusBadge = document.getElementById('sim-badge-status');
+          if (statusBadge) {
+            if (sla >= 99.0) {
+              statusBadge.textContent = currentLang === 'vi' ? '● ĐẠT CHUẨN SLA (>99%)' : '● OPTIMAL SLA (>99%)';
+              statusBadge.style.color = 'var(--cyan)';
+            } else {
+              statusBadge.textContent = currentLang === 'vi' ? '▲ CẢNH BÁO SLA (<99%)' : '▲ SLA WATCH (<99%)';
+              statusBadge.style.color = '#E648B5';
+            }
           }
-        }
 
-        // Animate 7 Warehouse Bars in SVG
-        const hubFactors = [0.92, 0.96, 0.98, 0.94, 1.0, 0.97, 1.02];
-        const ratio = Math.min(1, Math.max(0.35, (sla - 96.0) / 3.85));
-        hubFactors.forEach((f, idx) => {
-          const bar = document.getElementById('sim-bar-' + (idx + 1));
-          if (bar) {
-            const h = Math.round(Math.min(78, Math.max(24, 72 * ratio * f)));
-            const y = 90 - h;
-            bar.setAttribute('height', String(h));
-            bar.setAttribute('y', String(y));
-          }
-        });
+          const hubFactors = [0.92, 0.96, 0.98, 0.94, 1.0, 0.97, 1.02];
+          const ratio = Math.min(1, Math.max(0.35, (sla - 96.0) / 3.85));
+          hubFactors.forEach((f, idx) => {
+            const bar = document.getElementById('sim-bar-' + (idx + 1));
+            if (bar) {
+              const h = Math.round(Math.min(78, Math.max(24, 72 * ratio * f)));
+              const y = 90 - h;
+              bar.setAttribute('height', String(h));
+              bar.setAttribute('y', String(y));
+            }
+          });
+        } catch (err) {}
       };
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.case-modal.open').forEach(m => {
-            m.classList.remove('open');
-          });
-          document.body.style.overflow = '';
+      // Mechanism 3: Close modals on Escape key (attached to both window and document)
+      const handleEscKey = (e) => {
+        if (!e) return;
+        if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+          window.closeAllModals();
         }
-      });
+      };
+      window.addEventListener('keydown', handleEscKey);
+      document.addEventListener('keydown', handleEscKey);
+
+      function bindModalCloseHandlers() {
+        try {
+          const modals = document.querySelectorAll('.case-modal');
+          if (modals && modals.length) {
+            modals.forEach(modal => {
+              // Ensure closed on init
+              applyClosedModalState(modal);
+
+              // Mechanism 2: Close when clicking backdrop/overlay outside .case-modal-dialog
+              modal.addEventListener('click', (e) => {
+                const dialog = modal.querySelector('.case-modal-dialog');
+                if (e.target === modal || (dialog && !dialog.contains(e.target))) {
+                  window.closeCaseModal(modal.id);
+                }
+              });
+
+              // Mechanism 1: Direct click listener on close button (X) inside modal
+              const closeBtns = modal.querySelectorAll('.case-modal-close');
+              if (closeBtns && closeBtns.length) {
+                closeBtns.forEach(btn => {
+                  btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.closeCaseModal(modal.id);
+                  });
+                });
+              }
+            });
+          }
+        } catch (err) {}
+      }
 
       function lockCardDimensions() {
-        const cards = document.querySelectorAll('.glass-card, .flow-card');
-        cards.forEach(c => { c.style.minHeight = ''; });
-        if (window.innerWidth <= 680) return;
+        try {
+          const cards = document.querySelectorAll('.glass-card, .flow-card');
+          if (!cards || !cards.length) return;
+          cards.forEach(c => { if (c && c.style) c.style.minHeight = ''; });
+          if (window.innerWidth <= 680) return;
 
-        const i18nNodes = document.querySelectorAll('[data-en][data-vi]');
+          const i18nNodes = document.querySelectorAll('[data-en][data-vi]');
+          if (!i18nNodes || !i18nNodes.length) return;
 
-        // Measure heights in current language
-        const heightsA = Array.from(cards).map(c => c.getBoundingClientRect().height);
+          const heightsA = Array.from(cards).map(c => c ? c.getBoundingClientRect().height : 0);
 
-        // Temporarily switch to the other language to measure max height
-        const otherLang = currentLang === 'en' ? 'vi' : 'en';
-        i18nNodes.forEach(el => {
-          const val = el.getAttribute('data-' + otherLang);
-          if (val !== null) el.innerHTML = val;
-        });
-        const heightsB = Array.from(cards).map(c => c.getBoundingClientRect().height);
+          const otherLang = currentLang === 'en' ? 'vi' : 'en';
+          i18nNodes.forEach(el => {
+            if (!el) return;
+            const val = el.getAttribute('data-' + otherLang);
+            if (val !== null) el.innerHTML = val;
+          });
+          const heightsB = Array.from(cards).map(c => c ? c.getBoundingClientRect().height : 0);
 
-        // Restore current language and lock minHeight so card frames never shift size
-        i18nNodes.forEach(el => {
-          const val = el.getAttribute('data-' + currentLang);
-          if (val !== null) el.innerHTML = val;
-        });
-        cards.forEach((c, i) => {
-          const maxH = Math.ceil(Math.max(heightsA[i], heightsB[i]));
-          if (maxH > 0) c.style.minHeight = maxH + 'px';
-        });
+          i18nNodes.forEach(el => {
+            if (!el) return;
+            const val = el.getAttribute('data-' + currentLang);
+            if (val !== null) el.innerHTML = val;
+          });
+          cards.forEach((c, i) => {
+            if (!c || !c.style) return;
+            const maxH = Math.ceil(Math.max(heightsA[i] || 0, heightsB[i] || 0));
+            if (maxH > 0) c.style.minHeight = maxH + 'px';
+          });
+        } catch (err) {}
       }
 
       function applyLanguage(lang, notify) {
-        currentLang = lang;
-        document.documentElement.lang = lang;
+        try {
+          if (lang !== 'en' && lang !== 'vi') lang = 'en';
+          currentLang = lang;
+          if (document.documentElement) document.documentElement.lang = lang;
+          safeSetStorage('portfolio_lang', lang);
 
-        const i18nNodes = document.querySelectorAll('[data-en][data-vi]');
-        i18nNodes.forEach(el => {
-          const val = el.getAttribute('data-' + lang);
-          if (val !== null) {
-            el.innerHTML = val;
+          const i18nNodes = document.querySelectorAll('[data-en][data-vi]');
+          if (i18nNodes && i18nNodes.length) {
+            i18nNodes.forEach(el => {
+              if (!el) return;
+              const val = el.getAttribute('data-' + lang);
+              if (val !== null) {
+                el.innerHTML = val;
+              }
+            });
           }
-        });
 
-        const opts = document.querySelectorAll('#lang-toggle .lang-opt');
-        opts.forEach(opt => {
-          opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
-        });
+          const opts = document.querySelectorAll('#lang-toggle .lang-opt');
+          if (opts && opts.length) {
+            opts.forEach(opt => {
+              if (!opt) return;
+              opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+            });
+          }
 
-        if (typeof window.updateBiSimulator === 'function') {
-          window.updateBiSimulator();
-        }
+          if (typeof window.updateBiSimulator === 'function') {
+            window.updateBiSimulator();
+          }
 
-        if (notify) {
-          showToast(lang === 'vi' ? 'Đã chuyển sang Tiếng Việt (VI)' : 'Switched to English (EN)');
-        }
+          if (notify) {
+            showToast(lang === 'vi' ? 'Đã chuyển sang Tiếng Việt (VI)' : 'Switched to English (EN)');
+          }
+        } catch (err) {}
       }
 
       document.addEventListener('DOMContentLoaded', () => {
+        bindModalCloseHandlers();
+
+        const savedLang = safeGetStorage('portfolio_lang');
+        if (savedLang === 'vi' || savedLang === 'en') {
+          applyLanguage(savedLang, false);
+        }
+
         lockCardDimensions();
         if (typeof window.updateBiSimulator === 'function') {
           window.updateBiSimulator();
@@ -3327,7 +3525,7 @@ ORDER BY Department, Salary_Rank;</pre>
         const langBtn = document.getElementById('lang-toggle');
         if (langBtn) {
           langBtn.addEventListener('click', (e) => {
-            const targetOpt = e.target.closest('[data-lang]');
+            const targetOpt = e && e.target && typeof e.target.closest === 'function' ? e.target.closest('[data-lang]') : null;
             let nextLang = currentLang === 'en' ? 'vi' : 'en';
             if (targetOpt) {
               const clickedLang = targetOpt.getAttribute('data-lang');
@@ -3338,6 +3536,10 @@ ORDER BY Department, Salary_Rank;</pre>
             applyLanguage(nextLang, true);
           });
         }
+      });
+
+      window.addEventListener('pageshow', () => {
+        window.closeAllModals();
       });
     })();
   </script>
